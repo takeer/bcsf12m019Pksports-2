@@ -1,0 +1,120 @@
+﻿@model Practice1_Web.Models.item
+@{
+    ViewBag.Title = "AddAnItem";
+    Layout = "~/Views/Shared/_AdminView.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="row">
+        @*shows a white strip at the top*@
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
+                    <h4><i class="fa fa-fw fa-check"></i> @ViewBag.headingTitle</h4>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <form id="additemform" class="form-horizontal" role="form" style="border:dotted" action="AddItem" method="post" enctype="multipart/form-data">
+        <br /><br />
+        <div class="form-group">
+            <label for="firstname" class="col-md-3 control-label">Name</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="Name" id="name" placeholder="Gloves" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="col-md-3 control-label">Category</label>
+            <div class="col-md-9">
+                @{List<SelectListItem> list1 = (List<SelectListItem>)Session["listCategory"];}
+                @Html.DropDownListFor(m=>m.Category, list1, "-Select Category-", new { @class = "form-control" } )
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Price</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="Price" id="price" placeholder="300" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="icode" class="col-md-3 control-label">Quantity</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="Quantity" placeholder="1" id="quantity">
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-offset-3 col-md-9">
+                <input type="file" id="file" name="Pic" class="form-control" required />
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+
+            <div class="col-md-offset-3 col-md-9">
+                <button id="btn-signup" type="submit" class="btn btn-info"> &nbsp Add Item</button>
+
+            </div>
+        </div>
+        
+
+
+
+
+    </form>
+
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#additemform').submit(f1);
+        $('#name').focus();
+        
+    })
+    function f1() {
+        var catag = $('[name="Catagory"] :selected').text();
+       
+        if (catag == "-Select Category-") {
+            $('[name="Catagory"]').css('border-color', 'red');
+            $('[name="Catagory"]').focus();
+            return false;
+        }
+        var price = parseInt($('#price').val());
+        if ($.isNumeric(price) == false) {
+            price = null;
+        }
+        var quantity = parseInt($('#quantity').val());
+        if ($.isNumeric(quantity) == false) {
+            quantity = null;
+        }
+    
+        if (quantity == "" || quantity == null || quantity < 1) {
+            $('#quantity').focus();
+            $('#quantity').css('border-color', 'red');
+            alert('quantity cant less zero or non numeric')
+            return false;
+        }
+
+        if ( price== "" ||price == null || price<0) {
+            $('#price').focus();
+            $('#price').css('border-color', 'red');
+            alert('price cant be negative or non Numeric')
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+</script>

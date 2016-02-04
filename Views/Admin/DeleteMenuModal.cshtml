@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                <img class="img-circle" src="~/Images/0.jpg" style="max-height:100px;max-width:100px">
+            </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <form id="login-form" action="/Admin/DeleteAnItem" method="post">
+                    <div class="modal-body">
+
+                        <input type="text" id="pic0" name="Pic" hidden />
+                        <input type="text" id="id0" name="Id" hidden />
+                        <input type="text" id="category0" name="Category" hidden />
+
+                        Name: <input class="form-control" type="text" id="name0" name="Name" disabled />
+                        Discriptioin: <input class="form-control" type="text" name="Discription_" id="discription0" disabled />
+                        Price <input class="form-control" type="text" name="Price" id="price0" disabled />
+                        Quantity <input class="form-control" type="text" name="Quantity" id="quantity0" disabled />
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="save">Delete</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#save").click(function () {
+             //alert($("#name0").val())
+        })
+    })
+</script>

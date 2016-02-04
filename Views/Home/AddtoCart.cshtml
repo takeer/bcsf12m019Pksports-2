@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "AddtoCart";
+}
+
+@model Practice1_Web.Models.item
+
+
+
+@*<form action="/Home/ContinueShop" method="post">
+    <div>
+         <label class="form-control"> @Model.Id</label>
+
+            <input type="hidden" class="form-control" name="Id" value=@Model.Id />
+            <label class="form-control">
+                @Model.Price
+            </label>
+            <label class="form-control">
+                Enter Quantity
+            </label>
+            <input type="number" name="Quantity" class="form-control" id="quan" required />
+
+
+            <input type="submit" value="Continue Shoping" />
+        </div>
+</form>*@
+      <script>
+    function CheckQuantity() {
+        debugger;
+        var value = $('#quan').val();
+        var value1 = @(Model.Quantity);
+        if ( value1< value )
+        {
+
+            alert("Quantity Is Not Valid");
+            document.getElementById("quan").focus();
+
+        }
+        if(value<1) {
+
+            alert("Quantity Is Not Valid");
+            document.getElementById("quan").focus();
+
+        }
+        else
+        {
+            var sss=$('#quan').val();
+            var saa  = "/Home/Cart?id=" +@Model.Id +"&&q=" + sss;
+            $('#carta').prop('href', saa);
+            return true;
+        }
+
+
+    }
+</script>
+
+
+<div style="width:100% ;margin:1% ;height:600px;" align="center">
+    <div style="width:30%;margin:1% ">
+
+
+
+
+        <img src=@(Model.Pic) height="200" class="imgs" id="1-img">
+        <b> <span style="color:white"> Price :<span id="1-P">@(Model.Price) &nbsp &nbsp Quantity : @(Model.Quantity)  </span></span></b>
+        <p class="alert-info" style="font:medium">@Model.Discription_</p>
+    </div>
+    <div style="width:30%;margin:1% ">
+
+
+        <form action="/Home/ContinueShop" method="post" name="wqq" enctype="multipart/form-data">
+            <div>
+                <h3>
+                    <label class="form-control"> @Model.Id</label>
+
+                    <input type="hidden" class="form-control" name="Id" value=@Model.Id />
+                    <label class="form-control">
+                        @Model.Price
+                    </label>
+                    <label class="form-control">
+                        Enter Quantity
+                    </label>
+                    <input type="number" name="Quantity" class="form-control" id="quan" required />
+
+
+                    <input  type="submit" value="Continue Shoping" />
+
+                </h3>
+            </div>
+
+        </form>
+        <div>
+            <a href="/Home/Index"> <input class="btn btn-default" type="button" value="Cancel" /></a>
+            <a href="/Home/Cart" id="carta" onclick="return  CheckQuantity()"> <input class="btn btn-default" type="button" value="End Shoping" /></a>
+
+        </div>
+    </div>
+
+
+</div>

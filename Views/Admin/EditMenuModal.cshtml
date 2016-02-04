@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="modal fade"  id="edit-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" align="center">
+                    <img class="img-circle" id="headImg" src="~/Images/0.jpg" style="max-height:100px;max-width:100px">
+                </div>
+
+            <!-- Begin # DIV Form -->
+            <div id="div-forms">
+                <!-- Begin # Login Form -->
+                <form id="login-form" action="/Admin/EditAnItem" method="post">
+
+                    <div class="modal-body">
+                        <input type="text" id="pic1" name="Pic" hidden/>
+                        <input type="text" id="id1" name="Id" hidden/>
+                        <input type="text" id="category1" name="Category" hidden />
+
+                        Name: <input class="form-control" type="text" id="name1" name="Name" />
+                        Discriptioin: <input class="form-control" type="text" name="Discription_" id="discription1" />
+                        Price <input class="form-control" type="text" name="Price" id="price1" />
+                        Quantity <input class="form-control" type="text" name="Quantity" id="quantity1" />
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-4">
+                            <button type="submit" id="save" class="btn btn-primary btn-lg btn-block">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!-- End # DIV Form -->
+
+        </div>
+    </div>
+</div>
+<!-- END # MODAL LOGIN -->
+
+<script>
+    $(document).ready(function () {
+        
+        $("#save").click(function () {
+
+        })
+
+
+    })
+</script>

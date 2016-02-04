@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @RenderSection("signupPage", required: false)
+    @RenderSection("practice", required: false)
+
+    <script>
+        function Myfunction() {
+            //            debugger;
+            var minvalue = parseInt($('#minprice').val());
+            if ($.isNumeric(minvalue) == false)
+                minvalue = null;
+            var maxvalue = parseInt($('#maxprice').val());
+            if ($.isNumeric(maxvalue) == false)
+                maxvalue = null;
+            var catag = $('[name="Catag"]').val();
+
+            if (catag == "") {
+                $('[name="Catag"]').css('border-color', 'red');
+                $('[name="Catag"]').focus();
+                return false;
+            }
+
+            if (minvalue == NaN || minvalue == null || minvalue == "")
+                $('#minprice').val(0);
+            if (maxvalue == NaN || maxvalue == null || maxvalue == "")
+                $('#maxprice').val(2147483647);
+            return true;
+
+        }
+    </script>
+
+
+
+</head>
+<body style="background-color:white">
+    @{
+
+        var category = ViewBag.category;
+    }
+
+    @*Fixed Top*@
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand btn btn-default" href="/Home/Index">Pk Sports</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/Home/Index" class="btn btn-default hidden-xs"><span class="glyphicon glyphicon-home"></span> Home </a>
+                </li>
+                <li>
+                    <a href="/Home/Categories" class="btn btn-default hidden-xs"><span class="glyphicon glyphicon-home"></span> Categories</a>
+                </li>
+                <li>
+                    <a href="/Home/Contact" class="btn btn-default hidden-xs"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a>
+                </li>
+                <li>
+                    <a href="/Home/About" class="btn btn-default hidden-xs"><span class="glyphicon glyphicon-home"></span> About Us</a>
+                </li>
+                <li>              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/Home/Cart" class="btn btn-default hidden-xs"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a>
+                </li>
+                <li class="dropdown hidden-xs">
+                    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Account <b class="caret"></b> </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="btn btn-default btn-toolbar">My Account</a></li>
+                        <li><a class="btn btn-default" href="/Home/SaveRecord">Orders</a></li>
+                        <li>
+                            <a class="btn btn-block hidden-xs" href="/Home/Messages"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
+                        </li>
+                        <li><a class="btn btn-default hidden-xs" href="/Home/Cart">Cart</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="/Home/SignUp" class="btn btn-default hidden-xs"><span class="glyphicon glyphicon-user "></span> Sign Up</a>
+                </li>
+                <li>
+
+                    @if (Session["user"] == null)
+                    {
+                        <a href="/Home/signIn" class="btn btn-default hidden-xs">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Login
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Home/Logout" class="btn btn-default hidden-xs">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            <span>Logout</span>
+                        </a>
+                    }
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    @*Fixed Bottom*@
+    <div class="navbar navbar-default @*navbar-inverse*@  navbar-fixed-bottom hidden-xs">
+        <div class="navbar-header"><a class="navbar-brand btn btn-default" href="/Home/Index">PK SPORTS</a></div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a class="btn btn-default disabled">WE DELIEVER OUR BEST AND WE ARE BEST AT IT</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="btn btn-default disabled">WE DELIEVER OUR BEST AND WE ARE BEST AT IT</a></li>
+                <li>
+
+                    <a href="/Home/Index" class="btn btn-default"> PK SPORTS </a>
+                </li>
+            </ul>
+        </div>
+        @*<div class="container">
+                <div class="navbar-header well-sm">
+                    @Html.ActionLink("Pk Sports", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </div>*@
+    </div>
+    <br /><br />
+    <style>
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            width: 100%;
+            height: 50%;
+            max-height: 200px;
+            margin: auto;
+            border: dotted;
+        }
+    </style>
+
+    <div class="container">
+
+
+
+    </div>
+
+
+
+    @*search menu and slide show *@
+    <div class="row">
+
+
+
+
+        <div class="col-md-5" style="margin-left:20px;margin-bottom:20px">
+
+            <div class="slidesshow img-responsive">
+                <img src="~/Images/4.jpg" style="height:400px" />
+                <img src="~/Images/1.jpg" style="height:400px" />
+                <img src="~/Images/2.jpg" style="height:400px" />
+                <img src="~/Images/3.jpg" style="height:400px" />
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="col-md-6 pull-right" @*style="border:dotted"*@ @*style="background-color:white"*@>
+            <br />
+            <div><button class="btn btn-primary disabled">FAST SEARCH MENU</button></div>
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-inline">
+                    @{List<SelectListItem> list1 = (List<SelectListItem>)Session["listCategory"];}
+                    @Html.DropDownList("Catag", list1, "-Select Category-", new { @class = "form-control" })
+                    <input type="text" class="form-control" name="Name" id="name" placeholder="Name">
+                    @*<select class="form-control"> <option>Major Category</option><option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> </select>*@
+                    @*@Html.TextBox("Name", "Enter Name",new {@class="form-control" })*@
+                </div>
+                <div class="form-inline">
+                    <input type="text" class="form-control" name="Minprice" id="minprice" placeholder="Min price">
+                    <input type="text" class="form-control" name="Maxprice" id="maxprice" placeholder="Max price">
+                </div>
+
+                <button type="submit" class="btn btn-primary " onclick="return Myfunction()">S E A R C H  ---     I T E M</button>
+                <button type="reset" class="btn btn-primary">R E S E T</button>
+            }
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        @*<div class="col-md-4">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img class="thumbnail  img-responsive" src="/Images/0.jpg" width="200" height="200">
+                            <div class="carousel-caption text-right">
+                                <h3>Chania</h3>
+                                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <img class="thumbnail img-responsive" src="/Images/1.jpg" width="200" height="200">
+                        </div>
+
+                        <div class="item">
+                            <img class="thumbnail img-responsive" src="/Images/2.jpg" width="200" height="200">
+                        </div>
+
+                        <div class="item">
+                            <img class="thumbnail" src="/Images/3.jpg" width="200" height="200">
+                        </div>
+                    </div>
+
+                </div>
+                <button class="btn btn-primary btn-lg disabled">TODO-write some thing heare using js</button>
+                <br /><br />
+            </div>*@
+    </div>
+    @*Categories and renderbody()*@
+    <div class="row">
+        <div class="col-lg-2">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-check"></i>Major Categories</h4>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <a href=@("/Home/Categories/") class=" btn btn-link">Show All</a>
+                    </td>
+                </tr>
+                @foreach (var s in category)
+                {
+                    <tr class="hidden-xs">
+                        <td>
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            @*@Html.ActionLink(@ViewBag.categories[i]) ,"Categories");*@
+                            @*@Html.ActionLink(@ViewBag.categories[i], "Index")*@
+                            <a href=@("/Home/ItemsOfACategory/?category="+s.Name) class="btn btn-link">@(s.Name)</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <a href="/Home/Index" class=" btn btn-link">Pupolar</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-10">
+            @RenderBody()
+        </div>
+        <hr />
+    </div>
+    @*Bottom*@
+    <div style="background-color:black;border:dotted">
+        <br />
+        <footer class="bottom">
+            <div class="container">
+                @*<div class="row text-center">*@   @*with class="row" page scrols horizontaly!!!*@
+                <div class="col-md-4" @*style="border:dotted"*@>
+                    <h2>Getting to Know</h2>
+                    <p><span class="glyphicon glyphicon-chevron-right"> </span><a href="/Home/Contact"> COPYRIGHT</a></p>
+                    <p><span class="glyphicon glyphicon-chevron-right"> </span><a href="/Home/Contact"> HOW WE DO</a></p>
+                    <p><span class="glyphicon glyphicon-chevron-right"> </span><a href="/Home/Contact"> DELIEVERY PROCEDURE</a></p>
+                    <br /><br />
+                </div>
+                <div class="col-md-4" @*style="border:dotted"*@>
+                    <h2>Complains and Issues</h2>
+                    <p>
+                        <span class="glyphicon glyphicon-chevron-right"> </span>
+
+                        @Html.ActionLink("COMPLAIN A ISSUE", "Complains")
+                    </p>
+                    <p><span class="glyphicon glyphicon-chevron-right"> </span><a href="/Home/Complains"> REPORT BUG</a></p>
+                    <br /><br /><br />
+                </div>
+                <div class="col-md-4" @*style="border:dotted"*@>
+                    <h2>NEWSLETTER</h2>
+                    <p>Want to see every product or <a href="#">Any Specific</a>? Subscribe to our mailing list to receive an update when any new items arrive!</p>
+                    <form class="row">
+                        <div class="col-sm-8">
+                            <input type="text" name="email" class="form-control" placeholder="Email Address" />
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" name="Sign up" class="btn  btn-primary">Get Emails</button>
+                        </div>
+                    </form>
+                    <br />
+                    <p>Subscribed, But don't want to receive any more? Click here <a href="#">Unsubscibe</a></p>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <script type="text/javascript" src="~/Scripts/jquery.cycle.all.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.slidesshow').cycle({
+                fx: 'scrollRight',
+                next: '#right',
+                delay: -1000,
+
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>
+
+<!-- Indicators -->
+@*<ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>*@
+
+<!-- Wrapper for slides -->
+<!-- Left and right controls -->
+@*<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>*@

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_AdminView.cshtml";
+    string[] categories = ViewBag.categories;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-check"></i> Major Sports Categories</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @for (int k = 0, j = 0; k < categories.Length @*&& j < categories.Length/4+1*@; j++)
+        {
+            <div class="row">
+                @for (int i = 0; i < 4 && k < categories.Length; i++, k++)
+                {
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><i class="fa fa-fw fa-check"></i> @(categories[i])</h4>
+                            </div>
+                            <div class="panel-body">
+                                <a href=@("/Home/ItemsOfACategory/"+categories[i]) class="thumbnail">
+                                    <img style="max-height:100px" src=@("/Images/" + i % categories.Length + ".jpg") class="img-rounded">
+                                </a>
+                                <p>
+                                    <a href="@("/Home/ItemsOfACategory/"+categories[i])" class="btn btn-primary">Show Items</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+

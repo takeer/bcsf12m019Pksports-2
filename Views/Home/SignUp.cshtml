@@ -1,0 +1,160 @@
+﻿@model Practice1_Web.Models.user
+
+@{
+    ViewBag.Title = "SignUp";
+}
+
+
+
+
+@section signupPage
+{
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(f1);
+        function f1() {
+            $('#email').focus();
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#loginform').submit(f1);
+        })
+        $(document).ready(function () {
+
+            $("#UserName").blur(function () {
+
+                CheckAvail();
+            });
+
+        });
+        function f1()
+        {
+            if($("#UserName").val()=="" ||$("#UserName").val()==null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        function CheckAvail() {
+            var userName = $('#UserName').val();
+            if (userName != "")
+            {
+                $.getJSON("/Home/CheckUserName?UserName=" + userName, function (data) {
+
+                    if (data) {
+                        $('#info').html('Already in use');
+                        $('#info').show();
+                        $('#result').html("User already exists in database");
+
+                    }
+                    else {
+                        $('#info').html('Name Avaiable');
+                        $('#info').show();
+                    }
+
+                });
+            }
+            else
+            {
+                alert('sdf');
+                $('#info').html('User Name Can\'t be null');
+                $('#info').show();
+            }
+            $('#result').text("User Name Cann't be null");
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        @*shows a white strip at the top*@
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
+                    <h4><i class="fa fa-fw fa-check"></i> @ViewBag.headingTitle</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="loginform" action="/Home/ConfirmSignUp" method="post" class="form-horizontal" role="form" style="border:dotted">
+        <br /><br />
+        <div class="form-group">
+            <label for="Email" class="col-md-3 control-label">Email</label>
+            <div class="col-md-9">
+                <input type="email" class="form-control" id="email" name="Email" placeholder="Email Address" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*<label for="Username" class="col-md-3 control-label">User Name</label>*@
+            <div class="col-md-3 control-label">@Html.LabelFor(model => model.UserName)</div>
+
+            <div class="row col-md-9">
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="UserName" name="UserName" placeholder="First Name" required>
+                    <div class="col-md-3 alert alert-danger text-center" role="alert" id="info" hidden="hidden" align="center">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="FullName" class="col-md-3 control-label">Full Name</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="FullName" placeholder="Full Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Password" class="col-md-3 control-label">Password</label>
+            <div class="col-md-9">
+                <input type="password" class="form-control" name="Password" placeholder="Password" required>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <label for="icode" class="col-md-3 control-label">CNIC Number</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="CnicNumber" placeholder="CNIC Number">
+                </div>
+            </div>*@
+        <div class="form-group">
+            <label for="icode" class="col-md-3 control-label">Phone Number</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="MobileNo" placeholder="03414565452" required>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+
+            <div class="col-md-offset-3 col-md-9">
+                <button id="btn-signup" type="submit" class="btn btn-info"> &nbsp Sign Up</button>
+
+            </div>
+        </div>
+
+
+    </form>
+
+
+</div>

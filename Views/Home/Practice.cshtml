@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Practice";
+
+}
+@using (Html.BeginForm("Search", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <div class="form-inline">
+        @*@{List<SelectListItem> list1 = (List<SelectListItem>)Session["listCategory"];}
+        @Html.DropDownList("Catag", list1, "-Select Category-", new { @class = "form-control" })*@
+       <label >First Name</label>
+         <input type="text" class="form-control" name="Name" id="name" placeholder="Name">
+        @*<select class="form-control"> <option>Major Category</option><option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> </select>*@
+        @*@Html.TextBox("Name", "Enter Name",new {@class="form-control" })*@
+    </div>
+    <div class="form-inline">
+       
+        <label>Last Name: </label>
+        <input type="text" class="form-control" name="Minprice" id="minprice" placeholder="Min price">
+        
+    </div>
+    <div class="form-inline">
+        <label>Email: </label>
+        <input type="text" class="form-control" name="Maxprice" id="maxprice" placeholder="Max price">
+    </div>
+     <div class="form-inline">
+       <label class="form-inline">Phone Number</label>
+        <input type="text" class="form-control" name="Minprice" id="minprice" placeholder="Phone Number">
+        
+    </div>
+    <div class="form-inline">
+       <label class="form-inline">CNIC#</label>
+        <input type="text" class="form-control" name="Maxprice" id="maxprice" placeholder="">
+        
+    </div>
+
+    <button type="submit" class="btn btn-primary " onclick="return Myfunction()">S E A R C H  ---     I T E M</button>
+    <button type="reset" class="btn btn-primary">R E S E T</button>
+}

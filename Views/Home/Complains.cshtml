@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Complains";
+}
+
+<div class="container">
+    <div class="row">
+        @*shows a white strip at the top*@
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
+                    <h4><i class="fa fa-fw fa-check"></i> @ViewBag.headingTitle</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <form id="loginform" class="form-horizontal" role="form" style="border:dotted">
+        <br /><br />
+        <div class="container well">
+            <h1>We are very responsive to complains</h1>
+            <p>Tell Us if you have any Issue</p>
+        </div>
+
+        <div class="form-group">
+            @*<label for="complain" class="col-md-3 control-label">Enter here</label>*@
+            <div class="col-md-3 control-label">@Html.Label("Enter here")</div>
+            <div class="col-md-9">
+                <textarea rows="6" cols="6" class="form-control" name="complain" placeholder="Enter your issue here"></textarea>
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+
+            <div class="col-md-offset-3 col-md-9">
+                <button id="btn-signup" type="button" class="btn btn-info"> &nbsp Do it</button>
+                <button id="btn-signup" type="reset" class="btn btn-info"> &nbsp Reset</button>
+            </div>
+        </div>
+
+
+    </form>
+    
+
+   
+
+</div>
+

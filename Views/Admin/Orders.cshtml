@@ -1,0 +1,104 @@
+﻿@model List<Practice1_Web.Models.Sale>
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_AdminView.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div><h3>Filter Result</h3></div>
+        <form role="form" method="post" id="searchform">
+            <div class="form-inline">
+                <input type="text" class="form-control" id="username" placeholder="Username">
+                <input type="text" class="form-control" id="quantity" placeholder="Quantity">
+                <button type="button" class="btn btn-default " id="search2">Filter</button>
+            </div>
+
+        </form>
+
+
+        <br />
+    </div>
+
+    <div class="row">
+        <table id="table2" class="table table-bordered">
+            <tr><th>Sale  ID</th><th>Item Id</th><th>User Name</th><th>Quatity </th><th>Status </th><th>Edit</th><th>Delete</th></tr>
+            @foreach (var v in Model)
+            {
+                <tr>
+                    <th style="padding:6px">@v.Id</th>
+                    <th style="padding:6px">@v.ItemId</th>
+                    <th style="padding:6px">@v.UserId</th>
+                    <td style="padding:6px">@v.Quntity</td>
+                    <th style="padding:4px">@v.DeliveryStatus </th>
+                    <th style="padding:6px">@Html.ActionLink("Edit", "EditSale", new { id = v.Id })</th>
+                    <th style="padding:6px">@Html.ActionLink("Delete", "DeleteSale", new { id = v.Id })</th>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+</div>
+@section search{
+
+    <script>
+        $(document).ready(function () {
+            $(".b").click(function () {
+                alert('d');
+            })
+            $("#search2").click(function () {
+                var date = $("#date").val();
+                var name = $("#username").val();
+                var quantity = $('#quantity').val();
+                debugger
+
+                if (quantity == NaN || quantity == null || quantity == "") {
+                    quantity = null;
+                }
+                else if ($("#quantity").val() <= "0")
+                {
+                    $('#quantity').css('border-color', 'red');
+                    $('#quantity').focus();
+                    return false;
+                }
+
+                if (date == NaN || date == null || date == "")
+                    date = null;
+                if (name == NaN || name == null || name == "")
+                    name = null;
+                if (quantity == NaN || quantity == null || quantity == "")
+                    quantity = null;
+
+
+                $.ajax({
+
+                    url: "/Admin/SearchOrder?name=" + name + "&quantity=" + quantity + "&date=" + date,
+                    dataType: 'JSON',
+                    type: 'GET',
+                    error: function () {
+                        alert("ubalbe to fetch data");
+                    },
+                    success: function (result) {
+                        $("#table2").html("");
+                        $("#table2").append("<tr><th>Sale  ID</th><th>Item Id</th><th>User Name</th><th>Quatity </th><th>Status </th><th>Edit</th><th>Delete</th></tr>")
+                        $.each(result, function (index) {
+                            $("#table2").append("<tr>"
+                                + "<td>" + result[index].Id + "</td>"
+                                + "<td>" + " Name " + result[index].ItemId + "</td>"
+                               + "<td>" + result[index].UserId + "</td>"
+                               + "<td>" + result[index].Quntity + "</td>"
+                               + "<td>" + result[index].DeliveryStatus + "</td>"
+                               + "<td><a href=EditSale class=b id=" + result[index].Id + ">Edit </a></td>"
+                               + "<td><a href=DeleteSale class=b id=" + result[index].Id + ">Delete </a></td>"
+                                + "</tr>");
+                        })
+
+                        
+                    }
+                });
+
+            })
+        })
+    </script>
+}

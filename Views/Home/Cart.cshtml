@@ -1,0 +1,44 @@
+﻿@model List<Practice1_Web.Models.item>
+
+@{
+    ViewBag.Title = "Cart";
+}
+<div class=" container-fluid" style="margin:1% ">
+    <div class=" table-responsive " align="center">
+
+
+        @{int sum = 0;}
+        <table border="1" class="table table-bordered" align="center" style="font-size:large">
+
+            <tr class="info"><th>Item ID</th><th>Item Name</th><th>Price</th><th>Quantity</th><th>Sub total</th></tr>
+
+            @if (Model != null)
+            {
+
+                foreach (var v in Model)
+                {
+
+                    int suma = (@v.Quantity * @v.Price);
+
+                    <tr><td>@v.Id</td><td>@v.Name</td><td>@v.Price</td><td>@v.Quantity</td><td>@suma</td></tr>
+                    sum += suma;
+
+
+                }
+            }
+            <tr class="info"><th>Total</th><th>@sum</th></tr>
+        </table>
+
+        @if (Model != null)
+        {
+            <form method="post" action="/Home/SaveRecord" class="form-data">
+                <input type="submit" value="Confirm Order" class="btn-success" />
+                <button value=""> @Html.ActionLink("Cancel ", "Index") </button>
+
+            </form>
+
+        }
+
+    </div>
+
+</div>

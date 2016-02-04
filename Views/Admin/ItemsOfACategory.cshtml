@@ -1,0 +1,106 @@
+﻿@model List<Practice1_Web.Models.item>
+@{
+    ViewBag.Title = "ItemsOfACategory";
+    Layout = "~/Views/Shared/_AdminView.cshtml";
+}
+@{
+    string[] items = ViewBag.items;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-check"></i>@ViewBag.headingTitle</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        @for (int k = 0, j = 0; k < Model.Count; j++)
+        {
+            <div class="row">
+                @for (int i = 0; i < 4 && k < Model.Count; i++, k++)
+                {
+                    <input type="hidden" id=@("name"+Model[i].Id) value=@Model[i].Name />
+                    <input type="hidden" id=@("category"+Model[i].Id) value=@Model[i].Category />
+                    <input type="hidden" id=@("discription"+Model[i].Id) value=@Model[i].Discription_ />
+                    <input type="hidden" id=@("pic"+Model[i].Id) value=@Model[i].Pic />
+                    <input type="hidden" id=@("price"+Model[i].Id) value=@Model[i].Price />
+                    <input type="hidden" id=@("quantity"+Model[i].Id) value=@Model[i].Quantity />
+                    <input type="hidden" id=@("id"+Model[i].Id) value=@Model[i].Id />
+
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><i class="fa fa-fw fa-check">@Model[i].Name</i> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div align="center">
+                                   <button type="button" class="btn btn-default disabled">Rs: <span>@Model[i].Price</span></button>
+                                    <button type="button" class="btn btn-default disabled">Quantity: <span>@Model[i].Quantity</span></button>
+
+                                </div>
+                                <a href="#" @*@("/Home/ItemsOfACategory/?type="+Model[i].Name)*@ class="thumbnail">
+                                    <img style="max-height:100px" src=@Model[i].Pic class="img-rounded">
+
+                                </a>
+                                <div align="center">
+                                    <p>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" id=@Model[i].Id>Edit</button>
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#delete-modal" id=@Model[i].Id>&emsp;Delete</button>
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+@RenderPage("~/Views/Admin/EditMenuModal.cshtml");
+@RenderPage("~/Views/Admin/DeleteMenuModal.cshtml");
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".btn").on("click", function (event) {
+            var callerId = event.target.id;
+            if (callerId != 'save' && callerId != 'delete') {
+                $("#name1").val($('#name' + callerId).val());
+                $("#pic1").val($('#pic' + callerId).val());
+                $("#quantity1").val($('#quantity' + callerId).val());
+                $("#price1").val($('#price' + callerId).val());
+                $("#category1").val($('#category' + callerId).val());
+                $("#discription1").val($('#discription' + callerId).val());
+                $("#id1").val($('#id' + callerId).val());
+
+              
+                
+                $("#name0").val($('#name' + callerId).val());
+                $("#pic0").val($('#pic' + callerId).val());
+                $("#quantity0").val($('#quantity' + callerId).val());
+                $("#price0").val($('#price' + callerId).val());
+                $("#category0").val($('#category' + callerId).val());
+                $("#discription0").val($('#discription' + callerId).val());
+                $("#id0").val($('#id' + callerId).val());
+
+                $("#headImg").prop('src', $("#pic1").val());
+
+                
+            }//            event.stopPropagation();
+        });
+    });
+</script>
